@@ -1,10 +1,10 @@
 const { expect } = require('@playwright/test');
+const { BasePage } = require('./BasePage');
 
-class LoginPage {
+class LoginPage extends BasePage{
 
   constructor(page) {
-
-    this.page = page;
+    super(page);
 
     this.usernameInput = page.locator('input[name="username"]');
 
@@ -19,7 +19,7 @@ class LoginPage {
 
   async gotoLoginPage() {
 
-    await this.page.goto('/');
+    await this.navigate('/');
 
     await this.usernameInput.waitFor({
       state: 'visible'
@@ -44,6 +44,10 @@ class LoginPage {
     await this.usernameInput.fill(credentials.username);
 
     await this.passwordInput.fill(credentials.password);
+
+    await this.loginButton.waitFor({
+      state: 'visible'
+    });
 
     await this.loginButton.click();
   }

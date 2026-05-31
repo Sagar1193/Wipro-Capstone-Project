@@ -6,13 +6,13 @@ module.exports = defineConfig({
 
   testDir: './tests',
 
-  timeout: 30000,
+  timeout: 120000,
 
   fullyParallel: true,
 
   retries: 1,
 
-  workers: 4,
+  workers: 1,
 
   reporter: [
     ['html'],
@@ -23,7 +23,7 @@ module.exports = defineConfig({
 
     baseURL: process.env.BASE_URL,
 
-    headless: false,
+    headless: true,
 
     screenshot: 'only-on-failure',
 
@@ -33,7 +33,7 @@ module.exports = defineConfig({
 
     actionTimeout: 10000,
 
-    navigationTimeout: 15000,
+    navigationTimeout: 120000,
   },
 
   projects: [

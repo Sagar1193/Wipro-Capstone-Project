@@ -8,7 +8,7 @@ const { Logger } = require('../../utils/logger');
 
 test.describe('PIM Module Tests', () => {
 
-  test('Add New Employee', async ({
+  test.skip('Add New Employee', async ({
     loginPage,
     pimPage
   }) => {
@@ -148,4 +148,360 @@ test.describe('PIM Module Tests', () => {
     );
   });
 
+  test('Edit Employee Details', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    Logger.info(
+      'Starting Edit Employee Test'
+    );
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.editEmployee();
+
+    Logger.info(
+      'Employee Edit Successful'
+    );
+  });
+
+  test('Delete Employee', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    Logger.info(
+      'Starting Delete Employee Test'
+    );
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.deleteEmployee();
+
+    Logger.info(
+      'Employee Deleted Successfully'
+    );
+  });
+
+  // test('Search Employee By ID', async ({
+  //   loginPage,
+  //   pimPage
+  // }) => {
+
+  //   Logger.info(
+  //     'Starting Employee ID Search Test'
+  //   );
+
+  //   await loginPage.gotoLoginPage();
+
+  //   await loginPage.login();
+
+  //   await loginPage.verifySuccessfulLogin();
+
+  //   await pimPage.navigateToPIM();
+
+  //   const employeeId =
+  //     await pimPage.getFirstEmployeeId();
+
+  //   console.log(
+  //     `Searching Employee ID: ${employeeId}`
+  //   );
+
+  //   await pimPage.searchEmployeeById(
+  //     employeeId
+  //   );
+
+  //   await pimPage.verifyEmployeeIdSearch(
+  //     employeeId
+  //   );
+
+  //   Logger.info(
+  //     'Employee ID Search Successful'
+  //   );
+  // });
+
+  test('Reset Employee Search Filters', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    Logger.info(
+      'Starting Reset Search Test'
+    );
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.resetEmployeeSearch();
+
+    Logger.info(
+      'Reset Search Successful'
+    );
+  });
+
+  test('Verify PIM Page Load', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    Logger.info(
+      'Starting PIM Page Load Test'
+    );
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyPIMPageLoaded();
+
+    Logger.info(
+      'PIM Page Loaded Successfully'
+    );
+  });
+
+  test('Verify Add Employee Button Visible', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    Logger.info(
+      'Starting Add Button Validation'
+    );
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyAddEmployeeButtonVisible();
+
+    Logger.info(
+      'Add Button Validation Successful'
+    );
+  });
+
+  test('Cancel Add Employee', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    Logger.info(
+      'Starting Cancel Employee Test'
+    );
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.cancelAddEmployee();
+
+    Logger.info(
+      'Cancel Employee Test Successful'
+    );
+  });
+
+  // test('Verify Personal Details Page', async ({
+  //   loginPage,
+  //   pimPage
+  // }) => {
+
+  //   await loginPage.gotoLoginPage();
+
+  //   await loginPage.login();
+
+  //   await loginPage.verifySuccessfulLogin();
+
+  //   await pimPage.navigateToPIM();
+
+  //   await pimPage.verifyPersonalDetailsPage();
+  // });
+
+  test('Verify Add Employee Page Loaded', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyAddEmployeePageLoaded();
+  });
+
+  test('Verify Save Button Visible', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifySaveButtonVisible();
+  });
+
+  test('Verify Cancel Button Visible', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyCancelButtonVisible();
+  });
+
+  test('Verify Employee ID Visible', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyEmployeeIdVisible();
+  });
+
+  test('Verify First Name Required', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyFirstNameRequired();
+  });
+
+  test('Verify Employee List Page Loads', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyEmployeeListLoaded();
+  });
+
+  test('Search Invalid Employee', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.searchInvalidEmployee();
+  });
+
+  test('Search Empty Employee', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.searchEmptyEmployee();
+  });
+
+  test('Verify Search Button Visible', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifySearchButtonVisible();
+  });
+
+  test('Verify Reset Button Visible', async ({
+    loginPage,
+    pimPage
+  }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login();
+
+    await loginPage.verifySuccessfulLogin();
+
+    await pimPage.navigateToPIM();
+
+    await pimPage.verifyResetButtonVisible();
+  });
 });

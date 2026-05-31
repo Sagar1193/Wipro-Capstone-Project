@@ -27,6 +27,26 @@ class PIMPage {
     this.employeeTableRows =
       page.locator('.oxd-table-body .oxd-table-row');
 
+    this.firstEmployeeEditButton =
+      page.locator(
+        '.oxd-table-body .oxd-table-row button'
+      ).nth(0);
+
+    this.middleNameInput =
+      page.locator(
+        'input[name="middleName"]'
+      );
+
+    this.personalSaveButton =
+      page.getByRole('button', {
+        name: 'Save'
+      }).first();
+
+    this.successUpdateToast =
+      page.getByText(
+        'Successfully Updated'
+      );
+
     this.employeeNameCells =
       page.locator('.oxd-table-body .oxd-table-row .oxd-table-cell');
 
@@ -41,12 +61,63 @@ class PIMPage {
     });
 
     this.profileImage =
-      page.locator('input[type="file"]');
+      page.locator(
+        'input[type="file"]'
+      );
 
     this.profileImageSaveButton =
       page.getByRole('button', {
         name: 'Save'
-      }).last();
+      });
+
+    this.firstEmployeeDeleteButton =
+      page.locator(
+        '.oxd-table-body .oxd-table-row button'
+      ).nth(1);
+
+    this.confirmDeleteButton =
+      page.getByRole('button', {
+        name: 'Yes, Delete'
+      });
+
+    this.deleteSuccessToast =
+      page.getByText(
+        'Successfully Deleted'
+      );
+
+    this.employeeIdSearch =
+      page.locator('.oxd-form-row .oxd-input').nth(1);
+
+    this.employeeIdCells =
+      page.locator('.oxd-table-body .oxd-table-row .oxd-table-cell:nth-child(2)');
+
+    this.resetButton =
+      page.getByRole('button', {
+        name: 'Reset'
+      });
+
+    this.profilePictureImage =
+      page.getByRole('img', {
+        name: 'profile picture'
+      }).nth(1);
+
+    this.cancelButton =
+      page.getByRole('button', {
+        name: 'Cancel'
+      });
+
+    this.addEmployeeHeader =
+      page.getByRole('heading', {
+        name: 'Add Employee'
+      });
+
+    this.employeeIdField =
+      page.locator('.oxd-input').nth(4);
+
+    this.requiredFieldError =
+      page.locator(
+        '.oxd-input-field-error-message'
+      ).first();
   }
 
   async navigateToPIM() {
@@ -60,10 +131,7 @@ class PIMPage {
   async addEmployee(firstName, lastName) {
     await this.firstNameInput.fill(firstName);
     await this.lastNameInput.fill(lastName);
-    await Promise.all([
-    this.page.waitForLoadState('networkidle'),
-    this.saveButton.click()
-    ]);
+    await this.saveButton.click();
   }
 
   async verifyEmployeeAdded() {
@@ -102,14 +170,295 @@ class PIMPage {
   }
 
   async navigateToMyInfo() {
+
     await this.myInfoMenu.click();
+
+    await this.page.waitForURL(
+      '**/viewPersonalDetails/**',
+      {
+        timeout: 30000
+      }
+    );
+
+    console.log(
+      'MyInfo URL:',
+      this.page.url()
+    );
   }
 
   async uploadProfileImage(filePath) {
+
+    console.log(
+      'Before click:',
+      this.page.url()
+    );
+
+    await this.profilePictureImage.click();
+
+    await this.page.waitForURL(
+      '**/viewPhotograph/**',
+      {
+        timeout: 30000
+      }
+    );
+
+    console.log(
+      'After click:',
+      this.page.url()
+    );
+
+    await this.profileImage.waitFor({
+      state: 'attached',
+      timeout: 30000
+    });
+
     await this.profileImage.setInputFiles(
       filePath
     );
+
     await this.profileImageSaveButton.click();
+  }
+
+  async verifyProfileImageUploaded() {
+
+  await expect(
+    this.page.getByText(
+        'Successfully Updated'
+      )
+    ).toBeVisible({
+      timeout: 10000
+    });
+  }
+
+  async editEmployee() {
+
+    await this.firstEmployeeEditButton.click();
+
+    await this.personalDetailsHeader
+      .waitFor({
+        state: 'visible'
+      });
+
+    await this.middleNameInput.fill(
+      'Updated'
+    );
+
+    await this.personalSaveButton.click();
+
+    await expect(
+      this.successUpdateToast
+    ).toBeVisible({
+      timeout: 10000
+    });
+  }
+
+  async deleteEmployee() {
+
+    await this.firstEmployeeDeleteButton
+      .click();
+
+    await this.confirmDeleteButton
+      .click();
+
+    await expect(
+      this.deleteSuccessToast
+    ).toBeVisible({
+      timeout: 10000
+    });
+  }
+
+  async getFirstEmployeeId() {
+
+    await this.employeeTableRows.first().waitFor();
+
+    const firstRow =
+      await this.employeeTableRows.first().textContent();
+
+    const employeeId =
+      firstRow.match(/\d+/)?.[0];
+
+    return employeeId;
+  }
+
+  async searchEmployeeById(employeeId) {
+
+    await this.page.waitForURL(
+      '**/viewEmployeeList'
+    );
+
+    await this.employeeIdSearch.waitFor({
+      state: 'visible',
+      timeout: 30000
+    });
+
+    await this.employeeIdSearch.fill(
+      employeeId
+    );
+
+    await this.searchButton.click();
+  }
+
+  async verifyEmployeeIdSearch(employeeId) {
+
+    await this.employeeTableRows.first().waitFor({
+      state: 'visible'
+    });
+
+    const tableText =
+      await this.employeeTableRows.first()
+        .textContent();
+
+    expect(tableText)
+      .toContain(employeeId);
+  }
+
+  async resetEmployeeSearch() {
+
+    await this.employeeNameSearch.fill(
+      'Test Employee'
+    );
+
+    await this.resetButton.click();
+
+    await expect(
+      this.employeeNameSearch
+    ).toHaveValue('');
+  }
+
+  async verifyPIMPageLoaded() {
+
+    await expect(
+      this.pimMenu
+    ).toBeVisible();
+
+    await expect(
+      this.searchButton
+    ).toBeVisible();
+  }
+
+  async verifyAddEmployeeButtonVisible() {
+
+    await expect(
+      this.addEmployeeButton
+    ).toBeVisible();
+  }
+
+  async cancelAddEmployee() {
+
+    await this.clickAddEmployee();
+
+    await this.cancelButton.click();
+
+    await this.page.waitForURL(
+      '**/viewEmployeeList'
+    );
+
+    await expect(
+      this.searchButton
+    ).toBeVisible();
+  }
+
+  async verifyPersonalDetailsPage() {
+
+    await this.clickAddEmployee();
+
+    await expect(
+      this.personalDetailsHeader
+    ).toBeVisible();
+  }
+
+  async verifyAddEmployeePageLoaded() {
+
+    await this.clickAddEmployee();
+
+    await expect(
+      this.addEmployeeHeader
+    ).toBeVisible();
+  }
+
+  async verifySaveButtonVisible() {
+
+    await this.clickAddEmployee();
+
+    await expect(
+      this.saveButton
+    ).toBeVisible();
+  }
+
+  async verifyCancelButtonVisible() {
+
+    await this.clickAddEmployee();
+
+    await expect(
+      this.cancelButton
+    ).toBeVisible();
+  }
+
+  async verifyEmployeeIdVisible() {
+
+    await this.clickAddEmployee();
+
+    await expect(
+      this.employeeIdField
+    ).toBeVisible();
+  }
+
+  async verifyFirstNameRequired() {
+
+    await this.clickAddEmployee();
+
+    await this.saveButton.click();
+
+    await expect(
+      this.requiredFieldError
+    ).toBeVisible();
+  }
+
+  async verifyEmployeeListLoaded() {
+
+    await expect(
+      this.employeeTableRows.first()
+    ).toBeVisible();
+  }
+
+  async searchInvalidEmployee() {
+
+    await this.employeeNameSearch.fill(
+      'ZZZZZZZZZZ'
+    );
+
+    await this.searchButton.click();
+
+    await expect(
+      this.page
+        .locator('span')
+        .filter({
+          hasText: 'No Records Found'
+        })
+    ).toBeVisible();
+  }
+
+  async searchEmptyEmployee() {
+
+    await this.searchButton.click();
+
+    await expect(
+      this.employeeTableRows.first()
+    ).toBeVisible();
+  }
+
+  async verifySearchButtonVisible() {
+
+    await expect(
+      this.searchButton
+    ).toBeVisible();
+  }
+
+  async verifyResetButtonVisible() {
+
+    await expect(
+      this.resetButton
+    ).toBeVisible();
   }
 }
 

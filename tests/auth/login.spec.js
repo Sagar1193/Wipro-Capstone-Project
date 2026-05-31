@@ -1,51 +1,177 @@
-const { test, expect } = require('../../fixtures/baseFixtures');
+const { test, expect } =
+require('../../fixtures/baseFixtures');
 
-const { ScreenshotUtil } = require('../../utils/screenshotUtil');
+test.describe('Authentication Tests', () => {
 
-const { Logger } = require('../../utils/logger');
-
-test.describe('OrangeHRM Login Tests', () => {
-
-  test('Valid Login', async ({ loginPage, page }) => {
-
-    Logger.info('Starting Valid Login Test');
+  test('@smoke Valid Login',
+    async ({ loginPage }) => {
 
     await loginPage.gotoLoginPage();
-
     await loginPage.login();
-
     await loginPage.verifySuccessfulLogin();
-
-    await ScreenshotUtil.capture(
-      page,
-      'valid-login'
-    );
-
-    Logger.info('Valid Login Test Completed');
   });
 
-  test('Invalid Login', async ({ loginPage, page }) => {
-
-    Logger.info('Starting Invalid Login Test');
+  test('@regression Invalid Password',
+    async ({ loginPage }) => {
 
     await loginPage.gotoLoginPage();
 
-    await loginPage.usernameInput.fill('Admin');
-
-    await loginPage.passwordInput.fill('wrongPassword');
-
-    await loginPage.loginButton.click();
-
-    await expect(
-      page.getByText('Invalid credentials')
-    ).toBeVisible();
-
-    await ScreenshotUtil.capture(
-      page,
-      'invalid-login'
+    await loginPage.login(
+      'Admin',
+      'wrongpassword'
     );
 
-    Logger.info('Invalid Login Test Completed');
+    await loginPage.verifyInvalidCredentialsError();
+  });
+
+  test('@regression Invalid Username',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login(
+      'WrongUser',
+      'admin123'
+    );
+
+    await loginPage.verifyInvalidCredentialsError();
+  });
+
+  test('@regression Empty Username',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login(
+      '',
+      'admin123'
+    );
+
+    await loginPage.verifyRequiredFieldError();
+  });
+
+  test('@regression Empty Password',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login(
+      'Admin',
+      ''
+    );
+
+    await loginPage.verifyRequiredFieldError();
+  });
+
+  test('@regression Empty Credentials',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login(
+      '',
+      ''
+    );
+
+    await loginPage.verifyRequiredFieldError();
+  });
+
+  test('@sanity Password Mask Validation',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await expect(
+      loginPage.passwordInput
+    ).toHaveAttribute(
+      'type',
+      'password'
+    );
+  });
+
+  test('@regression Username With Spaces',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login(
+      '   ',
+      'admin123'
+    );
+
+    await loginPage.verifyRequiredFieldError();
+  });
+
+  test('@regression Password With Spaces',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await loginPage.login(
+      'Admin',
+      '   '
+    );
+
+    await loginPage.verifyRequiredFieldError();
+  });
+
+  test('@sanity Login Page Title Validation',
+    async ({ page, loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await expect(page)
+      .toHaveTitle(/OrangeHRM/);
+  });
+
+  test('@sanity Login Button Visible',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await expect(
+      loginPage.loginButton
+    ).toBeVisible();
+  });
+
+  test('@sanity Username Field Visible',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await expect(
+      loginPage.usernameInput
+    ).toBeVisible();
+  });
+
+  test('@sanity Password Field Visible',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await expect(
+      loginPage.passwordInput
+    ).toBeVisible();
+  });
+
+  test('@sanity Forgot Password Link Visible',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await expect(
+      loginPage.forgotPasswordLink
+    ).toBeVisible();
+  });
+
+  test('@sanity OrangeHRM Logo Visible',
+    async ({ loginPage }) => {
+
+    await loginPage.gotoLoginPage();
+
+    await expect(
+      loginPage.orangeHRMLogo
+    ).toBeVisible();
   });
 
 });

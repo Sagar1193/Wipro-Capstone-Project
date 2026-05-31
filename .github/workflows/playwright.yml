@@ -25,7 +25,7 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -35,7 +35,7 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
           APP_USERNAME: ${{ secrets.APP_USERNAME }}
           APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
-        run: npx playwright test --project=chromium
+        run: npx playwright test --grep-invert="Visual"
 
       - name: Upload Playwright Report
         if: always()

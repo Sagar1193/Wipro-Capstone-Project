@@ -65,14 +65,13 @@ class AdminPage {
 
   async navigateToAdmin() {
 
-  await this.adminMenu.click();
-
-  await this.page.waitForURL(
-    '**/admin/viewSystemUsers',
-    {
-      timeout: 30000
-    }
-  );
+  await Promise.all([
+    this.page.waitForURL(
+      '**/admin/viewSystemUsers',
+      { timeout: 30000 }
+    ),
+    this.adminMenu.click()
+  ]);
 
   await expect(
     this.searchButton

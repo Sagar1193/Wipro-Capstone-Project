@@ -9,6 +9,8 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
 jobs:
   test:
     timeout-minutes: 120
@@ -35,7 +37,7 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
           APP_USERNAME: ${{ secrets.APP_USERNAME }}
           APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
-        run: npx playwright test --project=chromium --grep-invert="Visual"
+        run: npx playwright test --grep-invert="Visual"
 
       - name: Upload Playwright Report
         if: always()

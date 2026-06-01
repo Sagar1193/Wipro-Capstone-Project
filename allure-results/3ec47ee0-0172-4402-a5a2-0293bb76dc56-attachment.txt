@@ -1,0 +1,4 @@
+[INFO]: Starting Employee Count Validation
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+Employee Count: 34
+[INFO]: Employee Count Validation Completed

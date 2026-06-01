@@ -1,0 +1,2 @@
+[INFO]: Starting Add Employee Test
+[INFO]: Employee Added Successfully

@@ -1,0 +1,6 @@
+[INFO]: Starting Employee ID Search Test
+Username: Admin
+Password: admin123
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+Searching Employee ID: 0468678
+[INFO]: Employee ID Search Successful

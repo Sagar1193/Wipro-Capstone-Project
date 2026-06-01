@@ -1,0 +1,3 @@
+[INFO]: Starting Employee ID Search Test
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+Searching Employee ID: 029599

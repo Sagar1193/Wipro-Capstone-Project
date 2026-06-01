@@ -1,0 +1,5 @@
+[INFO]: Starting Edit Employee Test
+Username: Admin
+Password: admin123
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+[INFO]: Employee Edit Successful

@@ -1,0 +1,2 @@
+[INFO]: Starting Profile Upload Test
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index

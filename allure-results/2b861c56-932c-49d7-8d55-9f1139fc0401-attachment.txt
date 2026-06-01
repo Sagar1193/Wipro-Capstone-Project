@@ -1,0 +1,2 @@
+[INFO]: Starting Employee Search Test
+[INFO]: Employee Search Successful

@@ -1,0 +1,161 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: auth\login.spec.js >> Authentication Tests >> @regression Invalid Password
+- Location: tests\auth\login.spec.js:16:3
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator:  getByText('Invalid credentials', { exact: true })
+Expected: visible
+Received: undefined
+Timeout:  5000ms
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for getByText('Invalid credentials', { exact: true })
+    - waiting for navigation to finish...
+
+```
+
+# Test source
+
+```ts
+  1   | const { test, expect } =
+  2   | require('../../fixtures/baseFixtures');
+  3   | 
+  4   | test.describe('Authentication Tests', () => {
+  5   | 
+  6   |   test('@smoke Valid Login',
+  7   |     async ({ loginPage }) => {
+  8   | 
+  9   |     await loginPage.gotoLoginPage();
+  10  | 
+  11  |     await loginPage.login();
+  12  | 
+  13  |     await loginPage.verifySuccessfulLogin();
+  14  |   });
+  15  | 
+  16  |   test('@regression Invalid Password',
+  17  |     async ({ loginPage }) => {
+  18  | 
+  19  |     await loginPage.gotoLoginPage();
+  20  | 
+  21  |     await loginPage.login(
+  22  |       'Admin',
+  23  |       'wrongpassword'
+  24  |     );
+  25  | 
+  26  |     await expect(
+  27  |       loginPage.invalidCredentialsError
+> 28  |     ).toBeVisible();
+      |       ^ Error: expect(locator).toBeVisible() failed
+  29  |   });
+  30  | 
+  31  |   test('@regression Invalid Username',
+  32  |     async ({ loginPage }) => {
+  33  | 
+  34  |     await loginPage.gotoLoginPage();
+  35  | 
+  36  |     await loginPage.login(
+  37  |       'WrongUser',
+  38  |       'admin123'
+  39  |     );
+  40  | 
+  41  |     await expect(
+  42  |       loginPage.invalidCredentialsError
+  43  |     ).toBeVisible();
+  44  |   });
+  45  | 
+  46  |   test('@regression Empty Username',
+  47  |     async ({ loginPage }) => {
+  48  | 
+  49  |     await loginPage.gotoLoginPage();
+  50  | 
+  51  |     await loginPage.login(
+  52  |       '',
+  53  |       'admin123'
+  54  |     );
+  55  | 
+  56  |     await expect(
+  57  |       loginPage.requiredFieldError
+  58  |     ).toBeVisible();
+  59  |   });
+  60  | 
+  61  |   test('@regression Empty Password',
+  62  |     async ({ loginPage }) => {
+  63  | 
+  64  |     await loginPage.gotoLoginPage();
+  65  | 
+  66  |     await loginPage.login(
+  67  |       'Admin',
+  68  |       ''
+  69  |     );
+  70  | 
+  71  |     await expect(
+  72  |       loginPage.requiredFieldError
+  73  |     ).toBeVisible();
+  74  |   });
+  75  | 
+  76  |   test('@regression Empty Credentials',
+  77  |     async ({ loginPage }) => {
+  78  | 
+  79  |     await loginPage.gotoLoginPage();
+  80  | 
+  81  |     await loginPage.login(
+  82  |       '',
+  83  |       ''
+  84  |     );
+  85  | 
+  86  |     await expect(
+  87  |       loginPage.requiredFieldError
+  88  |     ).toBeVisible();
+  89  |   });
+  90  | 
+  91  |   test('@sanity Password Mask Validation',
+  92  |     async ({ loginPage }) => {
+  93  | 
+  94  |     await loginPage.gotoLoginPage();
+  95  | 
+  96  |     await expect(
+  97  |       loginPage.passwordInput
+  98  |     ).toHaveAttribute(
+  99  |       'type',
+  100 |       'password'
+  101 |     );
+  102 |   });
+  103 | 
+  104 |   test('@regression Username With Spaces',
+  105 |     async ({ loginPage }) => {
+  106 | 
+  107 |     await loginPage.gotoLoginPage();
+  108 | 
+  109 |     await loginPage.login(
+  110 |       '   ',
+  111 |       'admin123'
+  112 |     );
+  113 | 
+  114 |     await expect(
+  115 |       loginPage.requiredFieldError
+  116 |     ).toBeVisible();
+  117 |   });
+  118 | 
+  119 |   test('@regression Password With Spaces',
+  120 |     async ({ loginPage }) => {
+  121 | 
+  122 |     await loginPage.gotoLoginPage();
+  123 | 
+  124 |     await loginPage.login(
+  125 |       'Admin',
+  126 |       '   '
+  127 |     );
+  128 | 
+```

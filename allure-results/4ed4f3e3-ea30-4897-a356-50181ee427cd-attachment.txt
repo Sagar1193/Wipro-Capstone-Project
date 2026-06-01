@@ -1,0 +1,4 @@
+[INFO]: Starting Edit Employee Test
+Username: sagar
+Password: admin123
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login

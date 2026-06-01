@@ -1,0 +1,228 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: pim\pim.spec.js >> PIM Module Tests >> Add New Employee
+- Location: tests\pim\pim.spec.js:9:3
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByRole('heading', { name: 'Personal Details' })
+Expected: visible
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" with timeout 15000ms
+  - waiting for getByRole('heading', { name: 'Personal Details' })
+
+```
+
+```yaml
+- complementary:
+  - navigation "Sidepanel":
+    - link "client brand banner":
+      - /url: https://www.orangehrm.com/
+      - img "client brand banner"
+    - textbox "Search"
+    - button ""
+    - separator
+    - list:
+      - listitem:
+        - link "Admin":
+          - /url: /web/index.php/admin/viewAdminModule
+      - listitem:
+        - link "PIM":
+          - /url: /web/index.php/pim/viewPimModule
+      - listitem:
+        - link "Leave":
+          - /url: /web/index.php/leave/viewLeaveModule
+      - listitem:
+        - link "Time":
+          - /url: /web/index.php/time/viewTimeModule
+      - listitem:
+        - link "Recruitment":
+          - /url: /web/index.php/recruitment/viewRecruitmentModule
+      - listitem:
+        - link "My Info":
+          - /url: /web/index.php/pim/viewMyDetails
+      - listitem:
+        - link "Performance":
+          - /url: /web/index.php/performance/viewPerformanceModule
+      - listitem:
+        - link "Dashboard":
+          - /url: /web/index.php/dashboard/index
+      - listitem:
+        - link "Directory":
+          - /url: /web/index.php/directory/viewDirectory
+      - listitem:
+        - link "Maintenance":
+          - /url: /web/index.php/maintenance/viewMaintenanceModule
+      - listitem:
+        - link "Claim":
+          - /url: /web/index.php/claim/viewClaimModule
+          - img
+          - text: Claim
+      - listitem:
+        - link "Buzz":
+          - /url: /web/index.php/buzz/viewBuzz
+- banner:
+  - heading "PIM" [level=6]
+  - link "Upgrade":
+    - /url: https://orangehrm.com/open-source/upgrade-to-advanced
+    - button "Upgrade"
+  - list:
+    - listitem:
+      - img "profile picture"
+      - paragraph: Test 84 wifi
+      - text: 
+  - navigation "Topbar Menu":
+    - list:
+      - listitem: Configuration 
+      - listitem:
+        - link "Employee List":
+          - /url: "#"
+      - listitem:
+        - link "Add Employee":
+          - /url: "#"
+      - listitem:
+        - link "Reports":
+          - /url: "#"
+      - button ""
+- heading "Add Employee" [level=6]
+- separator
+- button "Choose File"
+- img "profile picture"
+- button ""
+- paragraph: "Accepts jpg, .png, .gif up to 1MB. Recommended dimensions: 200px X 200px"
+- text: Employee Full Name*
+- textbox "First Name": Kenna
+- textbox "Middle Name"
+- textbox "Last Name": Kuphal
+- text: Employee Id
+- textbox: "0539"
+- text: Employee Id already exists
+- separator
+- paragraph: Create Login Details
+- checkbox
+- separator
+- paragraph: "* Required"
+- button "Cancel"
+- button "Save"
+- paragraph: OrangeHRM OS 5.8
+- paragraph:
+  - text: © 2005 - 2026
+  - link "OrangeHRM, Inc":
+    - /url: http://www.orangehrm.com
+  - text: . All rights reserved.
+```
+
+# Test source
+
+```ts
+  1  | const { expect } = require('@playwright/test');
+  2  | 
+  3  | class PIMPage {
+  4  | 
+  5  |   constructor(page) {
+  6  | 
+  7  |     this.page = page;
+  8  | 
+  9  |     this.pimMenu = page.getByRole('link', { name: 'PIM' });
+  10 | 
+  11 |     this.addEmployeeButton = page.getByRole('button', { name: 'Add' });
+  12 | 
+  13 |     this.firstNameInput = page.locator('input[name="firstName"]');
+  14 | 
+  15 |     this.lastNameInput = page.locator('input[name="lastName"]');
+  16 | 
+  17 |     this.saveButton = page.getByRole('button', { name: 'Save' });
+  18 | 
+  19 |     this.successToast = page.getByText('Successfully Saved');
+  20 | 
+  21 |     this.employeeNameSearch =
+  22 |       page.locator('(//input[@placeholder="Type for hints..."])[1]');
+  23 | 
+  24 |     this.searchButton =
+  25 |       page.getByRole('button', { name: 'Search' });
+  26 | 
+  27 |     this.employeeTableRows =
+  28 |       page.locator('.oxd-table-body .oxd-table-row');
+  29 | 
+  30 |     this.employeeNameCells =
+  31 |       page.locator('.oxd-table-body .oxd-table-row .oxd-table-cell');
+  32 | 
+  33 |     this.personalDetailsHeader =
+  34 |     page.getByRole('heading', {
+  35 |       name: 'Personal Details'
+  36 |     });
+  37 |   }
+  38 | 
+  39 |   async navigateToPIM() {
+  40 |     await this.pimMenu.click();
+  41 |   }
+  42 | 
+  43 |   async clickAddEmployee() {
+  44 |     await this.addEmployeeButton.click();
+  45 |   }
+  46 | 
+  47 |   async addEmployee(firstName, lastName) {
+  48 |     await this.firstNameInput.fill(firstName);
+  49 |     await this.lastNameInput.fill(lastName);
+  50 |     await Promise.all([
+  51 |     this.page.waitForLoadState('networkidle'),
+  52 |     this.saveButton.click()
+  53 |     ]);
+  54 |   }
+  55 | 
+  56 |   async verifyEmployeeAdded() {
+  57 |   await expect(
+  58 |     this.personalDetailsHeader
+> 59 |     ).toBeVisible({
+     |       ^ Error: expect(locator).toBeVisible() failed
+  60 |       timeout: 15000
+  61 |     });
+  62 |   }
+  63 | 
+  64 |   async searchEmployee(employeeName) {
+  65 |     await this.employeeNameSearch.fill(employeeName);
+  66 |     await this.searchButton.click();
+  67 |   }
+  68 |   
+  69 |   async verifyEmployeeInTable(employeeName) {
+  70 | 
+  71 |     await this.employeeTableRows
+  72 |       .first()
+  73 |       .waitFor({
+  74 |         state: 'visible',
+  75 |         timeout: 30000
+  76 |       });
+  77 | 
+  78 |     const rows =
+  79 |       await this.employeeTableRows.allTextContents();
+  80 | 
+  81 |     const employeeFound = rows.some(row =>
+  82 |       row.includes(employeeName)
+  83 |     );
+  84 | 
+  85 |     expect(employeeFound).toBeTruthy();
+  86 |   }
+  87 | 
+  88 |   async getEmployeeCount() {
+  89 |     await this.employeeTableRows.first().waitFor();
+  90 |     return await this.employeeTableRows.count();
+  91 |   }
+  92 | }
+  93 | 
+  94 | module.exports = { PIMPage };
+```

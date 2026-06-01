@@ -1,0 +1,3 @@
+[INFO]: Starting Reset Search Test
+Username: Admin
+Password: admin123

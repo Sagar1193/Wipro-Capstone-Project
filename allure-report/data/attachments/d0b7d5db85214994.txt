@@ -1,0 +1,3 @@
+[INFO]: Starting Delete Employee Test
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+[INFO]: Employee Deleted Successfully

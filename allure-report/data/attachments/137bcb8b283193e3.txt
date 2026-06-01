@@ -1,0 +1,5 @@
+[INFO]: Starting Reset Search Test
+Username: Admin
+Password: admin123
+Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
+[INFO]: Reset Search Successful

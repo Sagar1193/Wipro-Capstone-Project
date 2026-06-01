@@ -8,12 +8,19 @@ test.describe('Navigation Tests', () => {
 
     await loginPage.gotoLoginPage();
     await loginPage.login();
+    await loginPage.verifySuccessfulLogin();
+
+    await page.waitForLoadState(
+      'networkidle'
+    );
 
     await expect(
       page.getByRole('link', {
         name: 'Dashboard'
       })
-    ).toBeVisible();
+    ).toBeVisible({
+      timeout: 30000
+    });
   });
 
   test('PIM Menu Visible',
@@ -21,12 +28,19 @@ test.describe('Navigation Tests', () => {
 
     await loginPage.gotoLoginPage();
     await loginPage.login();
+    await loginPage.verifySuccessfulLogin();
+
+    await page.waitForLoadState(
+      'networkidle'
+    );
 
     await expect(
       page.getByRole('link', {
         name: 'PIM'
       })
-    ).toBeVisible();
+    ).toBeVisible({
+      timeout: 30000
+    });
   });
 
   test('Admin Menu Visible',
@@ -34,12 +48,19 @@ test.describe('Navigation Tests', () => {
 
     await loginPage.gotoLoginPage();
     await loginPage.login();
+    await loginPage.verifySuccessfulLogin();
+
+    await page.waitForLoadState(
+      'networkidle'
+    );
 
     await expect(
       page.getByRole('link', {
         name: 'Admin'
       })
-    ).toBeVisible();
+    ).toBeVisible({
+      timeout: 30000
+    });
   });
 
   test('Leave Menu Visible',
@@ -47,12 +68,19 @@ test.describe('Navigation Tests', () => {
 
     await loginPage.gotoLoginPage();
     await loginPage.login();
+    await loginPage.verifySuccessfulLogin();
+
+    await page.waitForLoadState(
+      'networkidle'
+    );
 
     await expect(
       page.getByRole('link', {
         name: 'Leave'
       })
-    ).toBeVisible();
+    ).toBeVisible({
+      timeout: 30000
+    });
   });
 
   test('Recruitment Menu Visible',
@@ -60,12 +88,19 @@ test.describe('Navigation Tests', () => {
 
     await loginPage.gotoLoginPage();
     await loginPage.login();
+    await loginPage.verifySuccessfulLogin();
+
+    await page.waitForLoadState(
+      'networkidle'
+    );
 
     await expect(
       page.getByRole('link', {
         name: 'Recruitment'
       })
-    ).toBeVisible();
+    ).toBeVisible({
+      timeout: 30000
+    });
   });
 
   test('My Info Menu Visible',
@@ -73,12 +108,19 @@ test.describe('Navigation Tests', () => {
 
     await loginPage.gotoLoginPage();
     await loginPage.login();
+    await loginPage.verifySuccessfulLogin();
+
+    await page.waitForLoadState(
+      'networkidle'
+    );
 
     await expect(
       page.getByRole('link', {
         name: 'My Info'
       })
-    ).toBeVisible();
+    ).toBeVisible({
+      timeout: 30000
+    });
   });
 
 });

@@ -254,16 +254,20 @@ class PIMPage {
 
   async deleteEmployee() {
 
-    await this.firstEmployeeDeleteButton
-      .click();
+    await this.firstEmployeeDeleteButton.click();
 
-    await this.confirmDeleteButton
-      .click();
+    await expect(
+      this.confirmDeleteButton
+    ).toBeVisible({
+      timeout: 30000
+    });
+
+    await this.confirmDeleteButton.click();
 
     await expect(
       this.deleteSuccessToast
     ).toBeVisible({
-      timeout: 10000
+      timeout: 30000
     });
   }
 

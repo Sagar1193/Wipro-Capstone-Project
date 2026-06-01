@@ -127,9 +127,15 @@ class AdminPage {
 
         await this.addButton.click();
 
+        await this.page.waitForLoadState(
+          'networkidle'
+        );
+
         await expect(
-            this.saveButton
-        ).toBeVisible();
+          this.saveButton
+        ).toBeVisible({
+          timeout: 30000
+        });
     }
 
     async verifyUserRoleDropdownVisible() {

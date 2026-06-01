@@ -48,14 +48,20 @@ class RecruitmentPage {
 
   async navigateToRecruitment() {
 
-    await this.recruitmentMenu.click();
+  await Promise.all([
+    this.page.waitForURL(
+      '**/recruitment/viewRecruitmentModule',
+      { timeout: 30000 }
+    ),
+    this.recruitmentMenu.click()
+  ]);
 
-    await expect(
-      this.searchButton
-    ).toBeVisible({
-      timeout: 30000
-    });
-  }
+  await expect(
+    this.searchButton
+  ).toBeVisible({
+    timeout: 30000
+  });
+}
 
   async verifyRecruitmentPageLoaded() {
     await expect(this.searchButton).toBeVisible();

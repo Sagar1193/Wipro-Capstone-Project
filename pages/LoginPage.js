@@ -108,7 +108,6 @@ class LoginPage extends BasePage {
     });
 
     await this.usernameInput.clear();
-
     await this.passwordInput.clear();
 
     await this.usernameInput.fill(
@@ -119,22 +118,34 @@ class LoginPage extends BasePage {
       password
     );
 
-    await this.loginButton.click();
+    await Promise.all([
+      this.page.waitForURL(
+        '**/dashboard/index',
+        {
+          timeout: 30000
+        }
+      ),
+      this.loginButton.click()
+    ]);
 
     console.log(
       'Current URL:',
       await this.page.url()
     );
-  }
+}
 
   async verifySuccessfulLogin() {
 
-    await expect(
-      this.userDropdown
-    ).toBeVisible({
-      timeout: 60000
-    });
-  }
+  await this.page.waitForLoadState(
+    'networkidle'
+  );
+
+  await expect(
+    this.userDropdown
+  ).toBeVisible({
+    timeout: 60000
+  });
+}
 
   // async verifyInvalidCredentialsError() {
 

@@ -1,3 +1,0 @@
-[INFO]: Starting Add Button Validation
-Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
-[INFO]: Add Button Validation Successful

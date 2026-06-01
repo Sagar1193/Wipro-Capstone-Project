@@ -1,1 +1,0 @@
-C:\Users\sagar\Downloads\Capstone\tests\visual\dashboardVisual.spec.js-snapshots\dashboard-page-chromium-win32.png is re-generated, writing actual.

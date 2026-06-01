@@ -1,2 +1,0 @@
-[INFO]: Starting Valid Login Test
-[INFO]: Valid Login Test Completed

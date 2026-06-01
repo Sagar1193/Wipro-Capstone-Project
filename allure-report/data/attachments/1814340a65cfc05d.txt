@@ -1,2 +1,0 @@
-[INFO]: Starting Employee Count Validation
-Employee Count: 0

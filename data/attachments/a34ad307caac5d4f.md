@@ -1,0 +1,239 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: admin/admin.spec.js >> Admin Module Tests >> Verify Cancel Button Visible
+- Location: tests/admin/admin.spec.js:181:1
+
+# Error details
+
+```
+TimeoutError: locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for getByRole('button', { name: 'Login' })
+    - locator resolved to <button type="submit" data-v-10d463b7="" data-v-0af708be="" class="oxd-button oxd-button--medium oxd-button--main orangehrm-login-button">…</button>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - performing click action
+    - click action done
+    - waiting for scheduled navigations to finish
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img "company-branding" [ref=e8]
+    - generic [ref=e9]:
+      - heading "Login" [level=5] [ref=e10]
+      - generic [ref=e11]:
+        - generic [ref=e13]:
+          - paragraph [ref=e14]: "Username : Admin"
+          - paragraph [ref=e15]: "Password : admin123"
+        - generic [ref=e16]:
+          - generic [ref=e18]:
+            - generic [ref=e19]:
+              - generic [ref=e20]: 
+              - generic [ref=e21]: Username
+            - textbox "Username" [ref=e23]: Admin
+          - generic [ref=e25]:
+            - generic [ref=e26]:
+              - generic [ref=e27]: 
+              - generic [ref=e28]: Password
+            - textbox "Password" [ref=e30]: admin123
+          - button "Login" [active] [ref=e32] [cursor=pointer]
+          - paragraph [ref=e34] [cursor=pointer]: Forgot your password?
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - link [ref=e37] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/orangehrm/mycompany/
+          - link [ref=e40] [cursor=pointer]:
+            - /url: https://www.facebook.com/OrangeHRM/
+          - link [ref=e43] [cursor=pointer]:
+            - /url: https://twitter.com/orangehrm?lang=en
+          - link [ref=e46] [cursor=pointer]:
+            - /url: https://www.youtube.com/c/OrangeHRMInc
+        - generic [ref=e49]:
+          - paragraph [ref=e50]: OrangeHRM OS 5.8
+          - paragraph [ref=e51]:
+            - text: © 2005 - 2026
+            - link "OrangeHRM, Inc" [ref=e52] [cursor=pointer]:
+              - /url: http://www.orangehrm.com
+            - text: . All rights reserved.
+  - img "orangehrm-logo" [ref=e54]
+```
+
+# Test source
+
+```ts
+  22  | 
+  23  |     this.credentialText =
+  24  |       page.locator(
+  25  |         '.orangehrm-demo-credentials p'
+  26  |       );
+  27  | 
+  28  |     this.invalidCredentialsError =
+  29  |       page.locator(
+  30  |         '.oxd-alert-content-text'
+  31  |       );
+  32  | 
+  33  |     this.requiredFieldError =
+  34  |       page.locator(
+  35  |         '.oxd-input-field-error-message'
+  36  |       ).first();
+  37  | 
+  38  |     this.forgotPasswordLink =
+  39  |       page.getByText(
+  40  |         'Forgot your password?'
+  41  |       );
+  42  | 
+  43  |     this.orangeHRMLogo =
+  44  |       page.locator(
+  45  |         'img[alt="company-branding"]'
+  46  |       );
+  47  | 
+  48  |     this.userDropdown =
+  49  |       page.locator(
+  50  |         '.oxd-userdropdown-name'
+  51  |       );
+  52  |   }
+  53  | 
+  54  |   async gotoLoginPage() {
+  55  | 
+  56  |     await this.page.goto(
+  57  |       'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
+  58  |       {
+  59  |         waitUntil: 'domcontentloaded',
+  60  |         timeout: 120000
+  61  |       }
+  62  |     );
+  63  | 
+  64  |     await this.page.waitForSelector(
+  65  |       'input[name="username"]',
+  66  |       {
+  67  |         state: 'visible',
+  68  |         timeout: 30000
+  69  |       }
+  70  |     );
+  71  |   }
+  72  | 
+  73  |   async getCredentials() {
+  74  | 
+  75  |     const texts =
+  76  |       await this.credentialText
+  77  |         .allTextContents();
+  78  | 
+  79  |     const username =
+  80  |       texts[0]
+  81  |         .replace('Username :', '')
+  82  |         .trim();
+  83  | 
+  84  |     const password =
+  85  |       texts[1]
+  86  |         .replace('Password :', '')
+  87  |         .trim();
+  88  | 
+  89  |     return {
+  90  |       username,
+  91  |       password
+  92  |     };
+  93  |   }
+  94  | 
+  95  |   async login(
+  96  |     username = process.env.APP_USERNAME,
+  97  |     password = process.env.APP_PASSWORD
+  98  |   ) {
+  99  | 
+  100 |     await this.usernameInput.waitFor({
+  101 |       state: 'visible',
+  102 |       timeout: 30000
+  103 |     });
+  104 | 
+  105 |     await this.passwordInput.waitFor({
+  106 |       state: 'visible',
+  107 |       timeout: 30000
+  108 |     });
+  109 | 
+  110 |     await this.usernameInput.clear();
+  111 | 
+  112 |     await this.passwordInput.clear();
+  113 | 
+  114 |     await this.usernameInput.fill(
+  115 |       username
+  116 |     );
+  117 | 
+  118 |     await this.passwordInput.fill(
+  119 |       password
+  120 |     );
+  121 | 
+> 122 |     await this.loginButton.click();
+      |                            ^ TimeoutError: locator.click: Timeout 10000ms exceeded.
+  123 | 
+  124 |     console.log(
+  125 |       'Current URL:',
+  126 |       await this.page.url()
+  127 |     );
+  128 |   }
+  129 | 
+  130 |   async verifySuccessfulLogin() {
+  131 | 
+  132 |     await expect(
+  133 |       this.userDropdown
+  134 |     ).toBeVisible({
+  135 |       timeout: 60000
+  136 |     });
+  137 |   }
+  138 | 
+  139 |   // async verifyInvalidCredentialsError() {
+  140 | 
+  141 |   //   await expect(
+  142 |   //     this.invalidCredentialsError
+  143 |   //   ).toBeVisible({
+  144 |   //     timeout: 10000
+  145 |   //   });
+  146 | 
+  147 |   //   await expect(
+  148 |   //     this.invalidCredentialsError
+  149 |   //   ).toContainText(
+  150 |   //     'Invalid credentials'
+  151 |   //   );
+  152 |   // }
+  153 | 
+  154 |   async verifyInvalidCredentialsError() {
+  155 | 
+  156 |   await expect(
+  157 |     this.page.getByText(
+  158 |       'Invalid credentials'
+  159 |     )
+  160 |   ).toBeVisible({
+  161 |     timeout: 15000
+  162 |   });
+  163 | }
+  164 | 
+  165 |   async verifyRequiredFieldError() {
+  166 | 
+  167 |     await expect(
+  168 |       this.requiredFieldError
+  169 |     ).toBeVisible({
+  170 |       timeout: 10000
+  171 |     });
+  172 | 
+  173 |     await expect(
+  174 |       this.requiredFieldError
+  175 |     ).toContainText(
+  176 |       'Required'
+  177 |     );
+  178 |   }
+  179 | }
+  180 | 
+  181 | module.exports = { LoginPage };
+```

@@ -1,3 +1,0 @@
-[INFO]: Starting Add Employee Test
-Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
-[INFO]: Employee Added Successfully

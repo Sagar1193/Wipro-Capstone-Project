@@ -1,3 +1,0 @@
-[INFO]: Starting PIM Page Load Test
-Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
-[INFO]: PIM Page Loaded Successfully

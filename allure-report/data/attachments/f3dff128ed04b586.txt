@@ -1,4 +1,0 @@
-[INFO]: Starting Profile Upload Test
-Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
-MyInfo URL: https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPersonalDetails/empNumber/7
-Uploading: C:\Users\sagar\Downloads\Capstone\test-data\images\profile.png

@@ -1,6 +1,0 @@
-[INFO]: Starting Profile Upload Test
-Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
-MyInfo URL: https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPersonalDetails/empNumber/7
-Before click: https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPersonalDetails/empNumber/7
-After click: https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewPhotograph/empNumber/7
-[INFO]: Profile Upload Successful

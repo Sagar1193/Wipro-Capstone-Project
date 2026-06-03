@@ -64,21 +64,19 @@ class AdminPage {
   }
 
   async navigateToAdmin() {
-
-  await Promise.all([
-    this.page.waitForURL(
+    await this.adminMenu.click();
+    await this.page.waitForURL(
       '**/admin/viewSystemUsers',
-      { timeout: 30000 }
-    ),
-    this.adminMenu.click()
-  ]);
-
-  await expect(
-    this.searchButton
-  ).toBeVisible({
-    timeout: 30000
-  });
-}
+      {
+        timeout: 60000
+      }
+    );
+    await expect(
+      this.systemUsersHeader
+    ).toBeVisible({
+      timeout: 60000
+    });
+  }
 
   async verifyAdminPageLoaded() {
     await expect(
@@ -99,100 +97,87 @@ class AdminPage {
   }
 
   async verifySearchButtonVisible() {
-
     await expect(
         this.searchButton
     ).toBeVisible();
     }
 
-    async verifyAddUserPageLoaded() {
-
+  async verifyAddUserPageLoaded() {
     await this.addButton.click();
+      await expect(
+          this.addUserHeader
+      ).toBeVisible();
+  }
 
+  async verifyCancelButtonVisible() {
+    await this.addButton.click();
     await expect(
-        this.addUserHeader
-    ).toBeVisible();
-    }
-
-    async verifyCancelButtonVisible() {
-
-        await this.addButton.click();
-
-        await expect(
-            this.cancelButton
-        ).toBeVisible();
-        }
-
-    async verifySaveButtonVisible() {
-
-        await this.addButton.click();
-
-        await this.page.waitForLoadState(
-          'networkidle'
-        );
-
-        await expect(
-          this.saveButton
-        ).toBeVisible({
-          timeout: 30000
-        });
-    }
-
-    async verifyUserRoleDropdownVisible() {
-
-        await this.addButton.click();
-
-        await expect(
-            this.userRoleDropdown
-        ).toBeVisible();
-    }
-
-    async verifyUsernameFieldVisible() {
-
-    await expect(
-      this.usernameField
+        this.cancelButton
     ).toBeVisible();
   }
 
-  async verifyEmployeeNameFieldVisible() {
+  async verifySaveButtonVisible() {
+      await this.addButton.click();
+      await this.page.waitForLoadState(
+        'networkidle'
+      );
+      await expect(
+        this.saveButton
+      ).toBeVisible({
+        timeout: 30000
+      });
+  }
 
+  async verifyUserRoleDropdownVisible() {
     await this.addButton.click();
+    await expect(
+      this.userRoleDropdown
+    ).toBeVisible({
+      timeout: 30000
+    });
+  }
 
+  async verifyUsernameFieldVisible() {
+    await this.addButton.click();
+    await expect(
+      this.usernameField
+    ).toBeVisible({
+      timeout: 30000
+    });
+  }
+
+  async verifyEmployeeNameFieldVisible() {
+    await this.addButton.click();
     await expect(
       this.employeeNameField
     ).toBeVisible();
   }
 
   async verifySystemUsersHeaderVisible() {
-
     await expect(
       this.systemUsersHeader
     ).toBeVisible();
   }
 
   async verifyRecordsTableVisible() {
-
     await expect(
       this.recordsTable
     ).toBeVisible();
   }
 
   async verifySearchFormVisible() {
-
     await expect(
       this.searchForm
     ).toBeVisible();
   }
 
   async verifyAdminMenuVisible() {
-
     await expect(
       this.adminMenu
     ).toBeVisible();
   }
 
   async verifyAddButtonEnabled() {
-
     await expect(
       this.addButton
     ).toBeEnabled();

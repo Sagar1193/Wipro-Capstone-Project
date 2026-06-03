@@ -9,12 +9,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyRecruitmentPageLoaded();
   });
 
@@ -22,12 +18,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyAddButtonVisible();
   });
 
@@ -35,12 +27,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifySearchButtonVisible();
   });
 
@@ -48,12 +36,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyResetButtonVisible();
   });
 
@@ -61,12 +45,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyCandidatesTabVisible();
   });
 
@@ -74,12 +54,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyVacanciesTabVisible();
   });
 
@@ -87,10 +63,7 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.verifyRecruitmentMenuVisible();
   });
 
@@ -98,12 +71,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyAddButtonEnabled();
   });
 
@@ -111,12 +80,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifySearchButtonEnabled();
   });
 
@@ -124,12 +89,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyResetButtonEnabled();
   });
 
@@ -137,12 +98,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyTableVisible();
   });
 
@@ -150,12 +107,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyFormVisible();
   });
 
@@ -163,12 +116,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyHeaderVisible();
   });
 
@@ -176,12 +125,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyCandidatesPage();
   });
 
@@ -189,12 +134,8 @@ test.describe(
     loginPage,
     recruitmentPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await recruitmentPage.navigateToRecruitment();
-
     await recruitmentPage.verifyVacanciesPage();
   });
 

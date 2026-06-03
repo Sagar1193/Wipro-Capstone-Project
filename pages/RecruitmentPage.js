@@ -37,31 +37,42 @@ class RecruitmentPage {
       });
 
     this.tableBody =
-      page.locator('.oxd-table-body');
+      page.locator('.oxd-table');
 
     this.form =
       page.locator('form');
 
-    this.header =
-      page.getByRole('heading').first();
+      this.header =
+        page.getByRole('heading', {
+          name: /Recruitment|Candidates|Vacancies/i
+        }).first();
   }
 
+//   async navigateToRecruitment() {
+
+//   await Promise.all([
+//     this.page.waitForURL(
+//       '**/recruitment/viewRecruitmentModule',
+//       { timeout: 30000 }
+//     ),
+//     this.recruitmentMenu.click()
+//   ]);
+
+//   await expect(
+//     this.searchButton
+//   ).toBeVisible({
+//     timeout: 30000
+//   });
+// }
+
   async navigateToRecruitment() {
-
-  await Promise.all([
-    this.page.waitForURL(
-      '**/recruitment/viewRecruitmentModule',
-      { timeout: 30000 }
-    ),
-    this.recruitmentMenu.click()
-  ]);
-
-  await expect(
-    this.searchButton
-  ).toBeVisible({
-    timeout: 30000
-  });
-}
+    await this.recruitmentMenu.click();
+    await expect(
+      this.searchButton
+    ).toBeVisible({
+      timeout: 30000
+    });
+  }
 
   async verifyRecruitmentPageLoaded() {
     await expect(this.searchButton).toBeVisible();
@@ -117,12 +128,20 @@ class RecruitmentPage {
 
   async verifyCandidatesPage() {
     await this.candidatesTab.click();
-    await expect(this.searchButton).toBeVisible();
+    await expect(
+      this.searchButton
+    ).toBeVisible({
+      timeout: 30000
+    });
   }
 
   async verifyVacanciesPage() {
     await this.vacanciesTab.click();
-    await expect(this.searchButton).toBeVisible();
+    await expect(
+      this.searchButton
+    ).toBeVisible({
+      timeout: 30000
+    });
   }
 }
 

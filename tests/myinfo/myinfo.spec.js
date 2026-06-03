@@ -7,12 +7,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyMyInfoPageLoaded();
   });
 
@@ -20,10 +16,7 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.verifyMyInfoMenuVisible();
   });
 
@@ -31,12 +24,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyFirstNameFieldVisible();
   });
 
@@ -44,12 +33,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyMiddleNameFieldVisible();
   });
 
@@ -57,12 +42,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyLastNameFieldVisible();
   });
 
@@ -70,12 +51,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyEmployeeIdFieldVisible();
   });
 
@@ -83,12 +60,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifySaveButtonVisible();
   });
 
@@ -96,12 +69,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifySaveButtonEnabled();
   });
 
@@ -109,12 +78,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyProfileImageVisible();
   });
 
@@ -122,12 +87,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyFormVisible();
   });
 
@@ -135,12 +96,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyFirstNameEnabled();
   });
 
@@ -148,12 +105,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyMiddleNameEnabled();
   });
 
@@ -161,12 +114,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyLastNameEnabled();
   });
 
@@ -174,12 +123,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyEmployeeIdEnabled();
   });
 
@@ -187,12 +132,8 @@ test.describe('My Info Module Tests', () => {
     loginPage,
     myInfoPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await myInfoPage.navigateToMyInfo();
-
     await myInfoPage.verifyPersonalDetailsHeaderVisible();
   });
 

@@ -52,7 +52,6 @@ class LoginPage extends BasePage {
   }
 
   async gotoLoginPage() {
-
     await this.page.goto(
       'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
       {
@@ -60,32 +59,17 @@ class LoginPage extends BasePage {
         timeout: 120000
       }
     );
-
-    await this.page.waitForSelector(
-      'input[name="username"]',
-      {
-        state: 'visible',
-        timeout: 30000
-      }
-    );
+    await expect(
+      this.usernameInput
+    ).toBeVisible({
+      timeout: 60000
+    });
   }
 
   async getCredentials() {
-
-    const texts =
-      await this.credentialText
-        .allTextContents();
-
-    const username =
-      texts[0]
-        .replace('Username :', '')
-        .trim();
-
-    const password =
-      texts[1]
-        .replace('Password :', '')
-        .trim();
-
+    const texts = await this.credentialText.allTextContents();
+    const username = texts[0].replace('Username :', '').trim();
+    const password = texts[1].replace('Password :', '').trim();
     return {
       username,
       password
@@ -97,55 +81,36 @@ class LoginPage extends BasePage {
     password = process.env.APP_PASSWORD
   ) {
 
-    await this.usernameInput.waitFor({
-      state: 'visible',
-      timeout: 30000
-    });
+    await this.usernameInput.fill('');
+    await this.passwordInput.fill('');
 
-    await this.passwordInput.waitFor({
-      state: 'visible',
-      timeout: 30000
-    });
+    await this.usernameInput.fill(username);
+    await this.passwordInput.fill(password);
 
-    await this.usernameInput.clear();
-    await this.passwordInput.clear();
-
-    await this.usernameInput.fill(
-      username
-    );
-
-    await this.passwordInput.fill(
-      password
-    );
-
-    await Promise.all([
-      this.page.waitForURL(
-        '**/dashboard/index',
-        {
-          timeout: 30000
-        }
-      ),
-      this.loginButton.click()
-    ]);
-
-    console.log(
-      'Current URL:',
-      await this.page.url()
-    );
-}
+    await this.loginButton.click();
+  }
 
   async verifySuccessfulLogin() {
+    await this.page.waitForURL(
+      '**/dashboard/index',
+      {
+        timeout: 60000
+      }
+    );
+    await expect(
+      this.userDropdown
+    ).toBeVisible();
+  }
 
-  await this.page.waitForLoadState(
-    'networkidle'
-  );
-
-  await expect(
-    this.userDropdown
-  ).toBeVisible({
-    timeout: 60000
-  });
-}
+  async verifyInvalidCredentialsError() {
+    await expect(
+      this.page.getByText(
+        'Invalid credentials'
+      )
+    ).toBeVisible({
+      timeout: 15000
+    });
+  }
 
   // async verifyInvalidCredentialsError() {
 
@@ -162,30 +127,23 @@ class LoginPage extends BasePage {
   //   );
   // }
 
-  async verifyInvalidCredentialsError() {
-
-  await expect(
-    this.page.getByText(
-      'Invalid credentials'
-    )
-  ).toBeVisible({
-    timeout: 15000
-  });
-}
-
   async verifyRequiredFieldError() {
-
     await expect(
       this.requiredFieldError
     ).toBeVisible({
       timeout: 10000
     });
-
     await expect(
       this.requiredFieldError
     ).toContainText(
       'Required'
     );
+  }
+
+  async loginAndVerify() {
+    await this.gotoLoginPage();
+    await this.login();
+    await this.verifySuccessfulLogin();
   }
 }
 

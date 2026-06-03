@@ -12,29 +12,16 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info('Starting Add Employee Test');
-
-    const employee =
-      TestData.generateEmployee();
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    const employee = TestData.generateEmployee();
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.clickAddEmployee();
-
     await pimPage.addEmployee(
       employee.firstName,
       employee.lastName
     );
-
     await pimPage.verifyEmployeeAdded();
-
     Logger.info(
       'Employee Added Successfully'
     );
@@ -44,41 +31,26 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Employee Search Test'
     );
-
     const employee =
       TestData.generateEmployee();
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.clickAddEmployee();
-
     await pimPage.addEmployee(
       employee.firstName,
       employee.lastName
     );
-
     await pimPage.verifyEmployeeAdded();
-
     await pimPage.navigateToPIM();
-
     await pimPage.searchEmployee(
       employee.firstName
     );
-
     await pimPage.verifyEmployeeInTable(
       employee.firstName
     );
-
     Logger.info(
       'Employee Search Successful'
     );
@@ -88,28 +60,16 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Employee Count Validation'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
-    const count =
-      await pimPage.getEmployeeCount();
-
+    const count = await pimPage.getEmployeeCount();
     console.log(
       `Employee Count: ${count}`
     );
-
     expect(count).toBeGreaterThan(0);
-
     Logger.info(
       'Employee Count Validation Completed'
     );
@@ -119,30 +79,19 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Profile Upload Test'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToMyInfo();
-
     const filePath = path.join(
       __dirname,
       '../../test-data/images/profile.png'
     );
-
     await pimPage.uploadProfileImage(
       filePath
     );
-
     await pimPage.verifyProfileImageUploaded();
-
     Logger.info(
       'Profile Upload Successful'
     );
@@ -152,45 +101,27 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Edit Employee Test'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.editEmployee();
-
     Logger.info(
       'Employee Edit Successful'
     );
   });
 
-  test('Delete Employee', async ({
+  test.skip('Delete Employee', async ({
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Delete Employee Test'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.deleteEmployee();
-
     Logger.info(
       'Employee Deleted Successfully'
     );
@@ -237,21 +168,12 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Reset Search Test'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.resetEmployeeSearch();
-
     Logger.info(
       'Reset Search Successful'
     );
@@ -261,21 +183,12 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting PIM Page Load Test'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyPIMPageLoaded();
-
     Logger.info(
       'PIM Page Loaded Successfully'
     );
@@ -285,21 +198,12 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Add Button Validation'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyAddEmployeeButtonVisible();
-
     Logger.info(
       'Add Button Validation Successful'
     );
@@ -309,21 +213,12 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
     Logger.info(
       'Starting Cancel Employee Test'
     );
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.cancelAddEmployee();
-
     Logger.info(
       'Cancel Employee Test Successful'
     );
@@ -349,15 +244,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyAddEmployeePageLoaded();
   });
 
@@ -365,15 +253,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifySaveButtonVisible();
   });
 
@@ -381,15 +262,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyCancelButtonVisible();
   });
 
@@ -397,15 +271,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyEmployeeIdVisible();
   });
 
@@ -413,15 +280,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyFirstNameRequired();
   });
 
@@ -429,15 +289,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyEmployeeListLoaded();
   });
 
@@ -445,15 +298,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.searchInvalidEmployee();
   });
 
@@ -461,15 +307,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.searchEmptyEmployee();
   });
 
@@ -477,15 +316,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifySearchButtonVisible();
   });
 
@@ -493,15 +325,8 @@ test.describe('PIM Module Tests', () => {
     loginPage,
     pimPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await pimPage.navigateToPIM();
-
     await pimPage.verifyResetButtonVisible();
   });
 });

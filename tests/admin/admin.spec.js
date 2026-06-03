@@ -6,15 +6,8 @@ test.describe('Admin Module Tests', () => {
     loginPage,
     adminPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await adminPage.navigateToAdmin();
-
     await adminPage.verifyAdminPageLoaded();
   });
 
@@ -22,15 +15,8 @@ test.describe('Admin Module Tests', () => {
     loginPage,
     adminPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await adminPage.navigateToAdmin();
-
     await adminPage.verifyAddButtonVisible();
   });
 
@@ -38,15 +24,8 @@ test.describe('Admin Module Tests', () => {
     loginPage,
     adminPage
   }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await adminPage.navigateToAdmin();
-
     await adminPage.verifyResetButtonVisible();
   });
 
@@ -54,170 +33,107 @@ test.describe('Admin Module Tests', () => {
     loginPage,
     adminPage
     }) => {
-
-    await loginPage.gotoLoginPage();
-
-    await loginPage.login();
-
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await adminPage.navigateToAdmin();
-
     await adminPage.verifySearchButtonVisible();
     });
 
-    test('Verify Add User Page Loaded', async ({
-        loginPage,
-        adminPage
-        }) => {
+  test('Verify Add User Page Loaded', async ({
+    loginPage,
+    adminPage
+    }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifyAddUserPageLoaded();
+  });
 
-        await loginPage.gotoLoginPage();
+  test('Verify Username Field Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifyUsernameFieldVisible();
+  });
 
-        await loginPage.login();
+  test('Verify Employee Name Field Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifyEmployeeNameFieldVisible();
+  });
 
-        await loginPage.verifySuccessfulLogin();
+  test('Verify System Users Header Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifySystemUsersHeaderVisible();
+  });
 
-        await adminPage.navigateToAdmin();
+  test('Verify Records Table Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifyRecordsTableVisible();
+  });
 
-        await adminPage.verifyAddUserPageLoaded();
-    });
+  test('Verify Search Form Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifySearchFormVisible();
+  });
 
-    test('Verify Username Field Visible', async ({
-  loginPage,
-  adminPage
-}) => {
+  test('Verify Admin Menu Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.verifyAdminMenuVisible();
+  });
 
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
+  test('Verify Add Button Enabled', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifyAddButtonEnabled();
+  });
 
-  await adminPage.navigateToAdmin();
+  test('Verify Cancel Button Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifyCancelButtonVisible();
+  });
 
-  await adminPage.verifyUsernameFieldVisible();
-});
+  test('Verify Save Button Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifySaveButtonVisible();
+  });
 
-test('Verify Employee Name Field Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifyEmployeeNameFieldVisible();
-});
-
-test('Verify System Users Header Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifySystemUsersHeaderVisible();
-});
-
-test('Verify Records Table Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifyRecordsTableVisible();
-});
-
-test('Verify Search Form Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifySearchFormVisible();
-});
-
-test('Verify Admin Menu Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.verifyAdminMenuVisible();
-});
-
-test('Verify Add Button Enabled', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifyAddButtonEnabled();
-});
-
-test('Verify Cancel Button Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifyCancelButtonVisible();
-});
-
-test('Verify Save Button Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifySaveButtonVisible();
-});
-
-test('Verify User Role Dropdown Visible', async ({
-  loginPage,
-  adminPage
-}) => {
-
-  await loginPage.gotoLoginPage();
-  await loginPage.login();
-  await loginPage.verifySuccessfulLogin();
-
-  await adminPage.navigateToAdmin();
-
-  await adminPage.verifyUserRoleDropdownVisible();
-});
+  test('Verify User Role Dropdown Visible', async ({
+    loginPage,
+    adminPage
+  }) => {
+    await loginPage.loginAndVerify();
+    await adminPage.navigateToAdmin();
+    await adminPage.verifyUserRoleDropdownVisible();
+  });
 
 });

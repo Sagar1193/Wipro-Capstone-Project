@@ -32,16 +32,18 @@ class DashboardPage {
       page.getByText('Employees on Leave Today');
 
     this.employeeDistributionWidget =
-      page.getByText('Employee Distribution by Sub Unit');
+      page.getByText(
+        /Employee Distribution by Sub Unit/i
+      );
 
     this.employeeLocationWidget =
-      page.getByText('Employee Distribution by Location');
+      page.getByText(
+        /Employee Distribution by Location/i
+      );
   }
 
   async navigateToDashboard() {
-
     await this.dashboardMenu.click();
-
     await expect(
       this.dashboardHeader
     ).toBeVisible({
@@ -50,7 +52,11 @@ class DashboardPage {
   }
 
   async verifyDashboardLoaded() {
-    await expect(this.dashboardHeader).toBeVisible();
+    await expect(
+      this.dashboardHeader
+    ).toBeVisible({
+      timeout: 30000
+    });
   }
 
   async verifyDashboardMenuVisible() {
@@ -86,7 +92,11 @@ class DashboardPage {
   }
 
   async verifyDashboardHeaderVisible() {
-    await expect(this.dashboardHeader).toBeVisible();
+    await expect(
+      this.dashboardHeader
+    ).toBeVisible({
+      timeout: 30000
+    });
   }
 
   async verifyDashboardMenuEnabled() {

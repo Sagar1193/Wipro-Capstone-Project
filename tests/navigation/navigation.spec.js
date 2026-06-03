@@ -10,10 +10,6 @@ test.describe('Navigation Tests', () => {
     await loginPage.login();
     await loginPage.verifySuccessfulLogin();
 
-    await page.waitForLoadState(
-      'networkidle'
-    );
-
     await expect(
       page.getByRole('link', {
         name: 'Dashboard'
@@ -30,9 +26,13 @@ test.describe('Navigation Tests', () => {
     await loginPage.login();
     await loginPage.verifySuccessfulLogin();
 
-    await page.waitForLoadState(
-      'networkidle'
-    );
+    await expect(
+      page.getByRole('link', {
+        name: 'Dashboard'
+      })
+    ).toBeVisible({
+      timeout: 30000
+    });
 
     await expect(
       page.getByRole('link', {
@@ -50,9 +50,13 @@ test.describe('Navigation Tests', () => {
     await loginPage.login();
     await loginPage.verifySuccessfulLogin();
 
-    await page.waitForLoadState(
-      'networkidle'
-    );
+    await expect(
+      page.getByRole('link', {
+        name: 'Dashboard'
+      })
+    ).toBeVisible({
+      timeout: 30000
+    });
 
     await expect(
       page.getByRole('link', {
@@ -70,9 +74,13 @@ test.describe('Navigation Tests', () => {
     await loginPage.login();
     await loginPage.verifySuccessfulLogin();
 
-    await page.waitForLoadState(
-      'networkidle'
-    );
+    await expect(
+      page.getByRole('link', {
+        name: 'Dashboard'
+      })
+    ).toBeVisible({
+      timeout: 30000
+    });
 
     await expect(
       page.getByRole('link', {
@@ -90,9 +98,13 @@ test.describe('Navigation Tests', () => {
     await loginPage.login();
     await loginPage.verifySuccessfulLogin();
 
-    await page.waitForLoadState(
-      'networkidle'
-    );
+    await expect(
+      page.getByRole('link', {
+        name: 'Dashboard'
+      })
+    ).toBeVisible({
+      timeout: 30000
+    });
 
     await expect(
       page.getByRole('link', {
@@ -110,9 +122,13 @@ test.describe('Navigation Tests', () => {
     await loginPage.login();
     await loginPage.verifySuccessfulLogin();
 
-    await page.waitForLoadState(
-      'networkidle'
-    );
+    await expect(
+      page.getByRole('link', {
+        name: 'Dashboard'
+      })
+    ).toBeVisible({
+      timeout: 30000
+    });
 
     await expect(
       page.getByRole('link', {

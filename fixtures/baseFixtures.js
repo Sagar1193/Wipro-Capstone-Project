@@ -10,59 +10,48 @@ const { DashboardPage } = require('../pages/DashboardPage');
 exports.test = base.test.extend({
 
   loginPage: async ({ page }, use) => {
-
     const loginPage = new LoginPage(page);
-
     await use(loginPage);
-
-  
   },
+  
   pimPage: async ({ page }, use) => {
-
     const pimPage = new PIMPage(page);
-
     await use(pimPage);
-
   },
 
   adminPage: async ({ page }, use) => {
-
     const adminPage = new AdminPage(page);
-
     await use(adminPage);
   },
 
   leavePage: async ({ page }, use) => {
-
-    const leavePage =
-      new LeavePage(page);
-
+    const leavePage = new LeavePage(page);
     await use(leavePage);
   },
 
   recruitmentPage: async ({ page }, use) => {
-
-    const recruitmentPage =
-      new RecruitmentPage(page);
-
+    const recruitmentPage = new RecruitmentPage(page);
     await use(recruitmentPage);
   },
 
   myInfoPage: async ({ page }, use) => {
-
-    const myInfoPage =
-      new MyInfoPage(page);
-
+    const myInfoPage = new MyInfoPage(page);
     await use(myInfoPage);
   },
 
   dashboardPage: async ({ page }, use) => {
+    const dashboardPage = new DashboardPage(page);
+    await use(dashboardPage);
+  },
 
-  const dashboardPage =
-    new DashboardPage(page);
-
-  await use(dashboardPage);
-}
+  authenticatedPage: async ({ page, loginPage }, use) => {
+    await loginPage.goto();
+    await loginPage.login(
+      process.env.APP_USERNAME,
+      process.env.APP_PASSWORD
+    );
+    await use(page);
+  }
 });
 
 exports.expect = base.expect;

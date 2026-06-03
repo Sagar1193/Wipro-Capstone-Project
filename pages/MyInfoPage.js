@@ -26,7 +26,7 @@ class MyInfoPage {
       page.locator('input[name="lastName"]');
 
     this.employeeIdField =
-      page.locator('.oxd-input').nth(4);
+       page.locator('input').nth(4);
 
     this.saveButton =
       page.getByRole('button', {
@@ -41,9 +41,7 @@ class MyInfoPage {
   }
 
   async navigateToMyInfo() {
-
     await this.myInfoMenu.click();
-
     await expect(
       this.personalDetailsHeader
     ).toBeVisible({
@@ -88,9 +86,12 @@ class MyInfoPage {
   }
 
   async verifySaveButtonVisible() {
+
     await expect(
       this.saveButton
-    ).toBeVisible();
+    ).toBeVisible({
+      timeout: 30000
+    });
   }
 
   async verifySaveButtonEnabled() {

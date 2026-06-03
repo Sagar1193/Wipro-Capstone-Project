@@ -5,14 +5,10 @@ class BasePage {
   }
 
   async navigate(path = '') {
-  await this.page.goto(path, {
-    waitUntil: 'domcontentloaded',
-    timeout: 60000
-  });
-  }
-
-  async wait(milliseconds) {
-    await this.page.waitForTimeout(milliseconds);
+    await this.page.goto(path, {
+      waitUntil: 'domcontentloaded',
+      timeout: 60000
+    });
   }
 
   async getPageTitle() {

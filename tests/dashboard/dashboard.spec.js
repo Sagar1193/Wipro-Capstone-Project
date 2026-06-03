@@ -8,10 +8,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyDashboardLoaded();
   });
 
@@ -20,10 +17,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyDashboardMenuVisible();
   });
 
@@ -32,10 +26,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyTimeAtWorkWidgetVisible();
   });
 
@@ -44,10 +35,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyMyActionsWidgetVisible();
   });
 
@@ -56,10 +44,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyQuickLaunchWidgetVisible();
   });
 
@@ -68,10 +53,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyBuzzLatestPostsWidgetVisible();
   });
 
@@ -80,10 +62,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyEmployeesOnLeaveWidgetVisible();
   });
 
@@ -92,10 +71,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyEmployeeDistributionWidgetVisible();
   });
 
@@ -104,10 +80,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyEmployeeLocationWidgetVisible();
   });
 
@@ -116,10 +89,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyDashboardHeaderVisible();
   });
 
@@ -128,10 +98,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyDashboardMenuEnabled();
   });
 
@@ -140,10 +107,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyTimeAtWorkWidgetExists();
   });
 
@@ -152,10 +116,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyMyActionsWidgetExists();
   });
 
@@ -164,10 +125,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyQuickLaunchWidgetExists();
   });
 
@@ -176,10 +134,7 @@ test.describe('Dashboard Module Tests', () => {
     loginPage,
     dashboardPage
   }) => {
-    await loginPage.gotoLoginPage();
-    await loginPage.login();
-    await loginPage.verifySuccessfulLogin();
-
+    await loginPage.loginAndVerify();
     await dashboardPage.verifyBuzzLatestPostsWidgetExists();
   });
 

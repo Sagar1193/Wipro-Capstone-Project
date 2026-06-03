@@ -11,16 +11,6 @@ class LeavePage {
         name: 'Leave'
       });
 
-    this.applyButton =
-      page.getByRole('link', {
-        name: 'Apply'
-      });
-
-    this.leaveListButton =
-      page.getByRole('link', {
-        name: 'Leave List'
-      });
-
     this.searchButton =
       page.getByRole('button', {
         name: 'Search'
@@ -62,26 +52,10 @@ class LeavePage {
         this.leaveTable =
           page.locator('.oxd-table-body');
 
-        this.applyLink =
-          page.getByRole('link', {
-            name: 'Apply'
-          });
-
-        this.leaveListLink =
-          page.getByRole('link', {
-            name: 'Leave List'
-          });
-
-        this.assignLeaveLink =
-          page.getByRole('link', {
-            name: 'Assign Leave'
-          });
   }
 
   async navigateToLeave() {
-
     await this.leaveMenu.click();
-
     await expect(
       this.searchButton
     ).toBeVisible({
@@ -108,120 +82,111 @@ class LeavePage {
   }
 
   async verifyApplyLeavePage() {
+    await this.applyMenu.click();
+    await expect(
+      this.leaveHeader
+    ).toBeVisible({
+      timeout: 30000
+    });
+  }
 
-  await this.applyMenu.click();
+  async verifyLeaveListPage() {
+    await this.leaveListMenu.click();
+    await this.page.waitForURL(
+      '**/leave/viewLeaveList',
+      {
+        timeout: 30000
+      }
+    );
+    await expect(
+      this.page.locator('form')
+    ).toBeVisible({
+      timeout: 30000
+    });
+  }
 
-        await expect(
-            this.page
-            .getByRole('heading')
-            .first()
-        ).toBeVisible();
-        }
+  async verifyAssignLeavePage() {
+    await this.assignLeaveMenu.click();
+    await expect(
+      this.leaveHeader
+    ).toBeVisible({
+      timeout: 30000
+    });
+  }
 
-        async verifyLeaveListPage() {
+  async verifyEntitlementsPage() {
+  //await this.page.getByText('Entitlements').first().click();
+    await this.page.locator('.oxd-topbar-body-nav-tab').filter({
+        hasText: 'Entitlements'
+      }).click();
+    await expect(
+        this.page
+        .locator('body')
+    ).toBeVisible();
+  }
 
-        await this.leaveListMenu.click();
+  async verifyMyLeavePage() {
+    await this.myLeaveMenu.click();
+    await expect(
+        this.searchButton
+    ).toBeVisible();
+  }
 
-        await expect(
-            this.searchButton
-        ).toBeVisible();
-        }
+  async verifyLeaveMenuVisible() {
+    await expect(
+      this.leaveMenu
+    ).toBeVisible();
+  }
 
-        async verifyAssignLeavePage() {
+  async verifyLeaveMenuEnabled() {
+    await expect(
+      this.leaveMenu
+    ).toBeEnabled();
+  }
 
-        await this.assignLeaveMenu.click();
+  async verifyApplyMenuVisible() {
+    await expect(
+      this.applyMenu
+    ).toBeVisible();
+  }
 
-        await expect(
-            this.page
-            .getByRole('heading')
-            .first()
-        ).toBeVisible();
-        }
+  async verifyLeaveListMenuVisible() {
+    await expect(
+      this.leaveListMenu
+    ).toBeVisible();
+  }
 
-        async verifyEntitlementsPage() {
+  async verifyAssignLeaveMenuVisible() {
+    await expect(
+      this.assignLeaveMenu
+    ).toBeVisible();
+  }
 
-        //await this.page.getByText('Entitlements').first().click();
-        await this.page.locator('.oxd-topbar-body-nav-tab').filter({
-            hasText: 'Entitlements'
-          }).click();
+  async verifyLeaveTableVisible() {
+    await expect(
+      this.leaveTable
+    ).toBeVisible({
+      timeout: 30000
+    });
+  }
 
-        await expect(
-            this.page
-            .locator('body')
-        ).toBeVisible();
-        }
+  async verifyLeaveHeaderVisible() {
+    await expect(
+      this.leaveHeader
+    ).toBeVisible();
+  }
 
-        async verifyMyLeavePage() {
+  async verifySearchButtonEnabled() {
+    await expect(
+      this.searchButton
+    ).toBeEnabled();
+  }
 
-        await this.myLeaveMenu.click();
-
-        await expect(
-            this.searchButton
-        ).toBeVisible();
-    }
-
-    async verifyLeaveMenuVisible() {
-
-      await expect(
-        this.leaveMenu
-      ).toBeVisible();
-    }
-
-    async verifyLeaveMenuEnabled() {
-
-  await expect(
-    this.leaveMenu
-  ).toBeEnabled();
-}
-
-async verifyApplyMenuVisible() {
-
-  await expect(
-    this.applyLink
-  ).toBeVisible();
-}
-async verifyLeaveListMenuVisible() {
-
-  await expect(
-    this.leaveListLink
-  ).toBeVisible();
-}
-
-async verifyAssignLeaveMenuVisible() {
-
-  await expect(
-    this.assignLeaveLink
-  ).toBeVisible();
-}
-
-async verifyLeaveTableVisible() {
-
-  await expect(
-    this.searchButton
-  ).toBeVisible();
-}
-
-async verifyLeaveHeaderVisible() {
-
-  await expect(
-    this.leaveHeader
-  ).toBeVisible();
-}
-
-async verifySearchButtonEnabled() {
-
-  await expect(
-    this.searchButton
-  ).toBeEnabled();
-}
-
-async verifyResetButtonEnabled() {
-
-  await expect(
-    this.resetButton
-  ).toBeEnabled();
-}
-
+  async verifyResetButtonEnabled() {
+    await expect(
+      this.resetButton
+    ).toBeEnabled();
+  }
 }
 
 module.exports = { LeavePage };

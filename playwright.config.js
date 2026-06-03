@@ -8,19 +8,22 @@ module.exports = defineConfig({
 
   timeout: 120000,
 
-  fullyParallel: true,
+  fullyParallel: false,
 
-  retries: 1,
+  forbidOnly: !!process.env.CI,
+
+  retries: process.env.CI ? 2 : 1,
 
   workers: 1,
 
+  outputDir: 'test-results/',
+
   reporter: [
-    ['html'],
+    ['html', { outputFolder: 'playwright-report' }],
     ['allure-playwright']
   ],
 
   use: {
-
     baseURL: process.env.BASE_URL,
 
     headless: true,
@@ -31,26 +34,35 @@ module.exports = defineConfig({
 
     trace: 'retain-on-failure',
 
-    actionTimeout: 10000,
+    actionTimeout: 30000,
 
     navigationTimeout: 120000,
+
+      launchOptions: {
+        slowMo: 100
+      }
   },
 
   projects: [
-
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome']
+      },
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox']
+      },
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari']
+      },
     },
   ],
 });

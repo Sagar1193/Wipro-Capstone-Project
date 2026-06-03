@@ -1,0 +1,2 @@
+[INFO]: Starting Reset Search Test
+[INFO]: Reset Search Successful

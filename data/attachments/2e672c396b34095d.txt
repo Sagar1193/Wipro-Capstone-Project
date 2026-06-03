@@ -1,3 +1,0 @@
-[INFO]: Starting Reset Search Test
-Current URL: https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index
-[INFO]: Reset Search Successful

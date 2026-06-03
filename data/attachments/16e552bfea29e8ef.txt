@@ -1,0 +1,2 @@
+[INFO]: Starting Cancel Employee Test
+[INFO]: Cancel Employee Test Successful

@@ -1,0 +1,2 @@
+[INFO]: Starting PIM Page Load Test
+[INFO]: PIM Page Loaded Successfully

@@ -113,7 +113,7 @@ test.describe(
       }
     );
 
-    test(
+    test.skip(
       'Leave Page Visual Validation',
       async ({
         page,

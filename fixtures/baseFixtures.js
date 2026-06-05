@@ -3,9 +3,9 @@ const { PIMPage } = require('../pages/PIMPage');
 const { LoginPage } = require('../pages/LoginPage');
 const { AdminPage } = require('../pages/AdminPage');
 const { LeavePage } = require('../pages/LeavePage');
-const { RecruitmentPage } = require('../pages/RecruitmentPage');
+const { RecruitmentPage } = require('../pages/RecruitmentPage-addon');
 const { MyInfoPage } = require('../pages/MyInfoPage');
-const { DashboardPage } = require('../pages/DashboardPage');
+const { DashboardPage } = require('../pages/DashboardPage-addon');
 
 exports.test = base.test.extend({
 
